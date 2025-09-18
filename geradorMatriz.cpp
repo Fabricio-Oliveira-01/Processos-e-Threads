@@ -2,7 +2,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include "criarMatrizes.cpp"
+#include "criarMatrizes.h"
 
 int main(int argc, char* argv[]) {
     if (argc != 5) {
@@ -10,15 +10,18 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    while(true) {
-        std::string entrada;
-        std::getline(std::cin, entrada);
-    }
-        
+    int linha1 = std::stoi(argv[1]);
+    int coluna1 = std::stoi(argv[2]);
+    int linha2 = std::stoi(argv[3]);
+    int coluna2 = std::stoi(argv[4]);
+  
+    geracaoDeMatriz(linha1, coluna1, "matriz1.txt");
+    geracaoDeMatriz(linha2, coluna2, "matriz2.txt");
 
-
+    std::cout << std::endl;
+    std::cout << "Matrizes geradas com sucesso!" << std::endl;
 
     return 0;
 }
-.
+
 
