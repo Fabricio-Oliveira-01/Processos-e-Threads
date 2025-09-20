@@ -26,7 +26,7 @@ void geracaoDeMatriz (int linha, int coluna, const std::string& nomeArquivo){
     std::ofstream arquivo_saida(nomeArquivo);
 
     if(!arquivo_saida.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo." << nomeArquivo << std::endl;
+        std::cerr << "Erro ao abrir o arquivo" << nomeArquivo << std::endl;
         return;
     }
 
