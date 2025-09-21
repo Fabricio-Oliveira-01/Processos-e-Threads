@@ -6,7 +6,7 @@
 
 int main(int argc, char* argv[]) {
     if (argc != 5) {
-        std::cout << "Uso: ./nome_do_executável <Dimensão 1 e 2 da Primeira Matriz> <Dimensões 1 e 2 da Segunda matriz>" << std::endl;
+        std::cout << "Uso: ./nome_do_executável <Linhas_M1> <Colunas_M1> <Linhas_M2> <Colunas_M2>" << std::endl;
         return 1;
     }
 

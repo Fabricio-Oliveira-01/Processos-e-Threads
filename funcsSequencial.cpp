@@ -1,10 +1,11 @@
 #include <iostream>
 #include <fstream>
-
+#include <iomanip> //Para setprecision
 #include "funcsSequencial.h"
 
+
 // Struct (declarado no .h) para retornar matriz, linhas e colunas
-Matriz lerMatriz(std::string nomeArquivo) {
+Matriz lerMatriz(const std::string& nomeArquivo) {
     std::ifstream arquivo(nomeArquivo);
 
     if(!arquivo.is_open()) {
@@ -13,9 +14,8 @@ Matriz lerMatriz(std::string nomeArquivo) {
     }
 
     Matriz M;
-
     arquivo >> M.linhas >> M.colunas; // Armazena as dimensões da primeira linha
-    M.valores.resize(M.linhas, std::vector<int>(M.colunas)); // Redimensiona o vetor "dados" do struct para o formato da matriz
+    M.valores.resize(M.linhas, std::vector<double>(M.colunas)); // Redimensiona o vetor "dados" do struct para o formato da matriz
 
     for(int i = 0; i < M.linhas; i++) {
         for(int j = 0; j < M.colunas; j++) {
@@ -28,18 +28,15 @@ Matriz lerMatriz(std::string nomeArquivo) {
 }
 
 
-
 // Multiplicação de matrizes: A(i, j) * B(j, k) = C(i, k)
 Matriz multSequencial(const Matriz& A, const Matriz& B) {
-    if (A.colunas != B.linhas) {
-        std::cerr << "Erro: dimensões incompatíveis para multiplicação." << std::endl;
-        return {0, 0, {}}; // Retorna matriz vazia seguindo o formato do struct
-    }
-
     Matriz C;
     C.linhas = A.linhas;
     C.colunas = B.colunas;
-    C.valores.assign(C.linhas, std::vector<int>(C.colunas, 0)); // Atribui os novos valores de linhas e colunas para o vetor da matriz
+    C.valores.resize(C.linhas); // Para redimensionar as linhas do vetor da matriz C
+    for (int i = 0; i < C.linhas; i++) {
+        C.valores[i].resize(C.colunas, 0); // Para redimensionar as colunas e inicializar as posições
+    }
     
     // Multiplicação de matrizes:
     // Soma dos produtos dos elementos correspondentes de uma linha da primeira matriz com uma coluna da segunda
@@ -54,4 +51,25 @@ Matriz multSequencial(const Matriz& A, const Matriz& B) {
     }
 
     return C;
+}
+
+
+void gerarMatrizSequencial(const Matriz& C, std::chrono::milliseconds tempoDeExecucao) {
+    std::ofstream arquivoResultado("matriz_resultado.txt");
+    if(!arquivoResultado.is_open()) {
+        std::cerr << "Erro ao abrir o arquivo matriz_resultado.txt" << std::endl;
+        return;
+    }
+
+    arquivoResultado << C.linhas << " " << C.colunas << std::endl; // Valores inseridos na primeira linha
+
+    for(int i = 0; i < C.linhas; i++) {
+        for(int j = 0; j < C.colunas; j++) {
+            arquivoResultado << "c" << i + 1 << j + 1 << " " << std::fixed << std::setprecision(3) << C.valores[i][j] << std::endl;
+            // Soma-se +1 para que os valores impressos comecem a partir de 1, não de 0
+        }
+    }
+
+    arquivoResultado << tempoDeExecucao.count() << std::endl;
+    arquivoResultado.close();
 }

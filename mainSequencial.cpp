@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
-
 #include "funcsSequencial.h"
+
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
@@ -20,8 +20,17 @@ int main(int argc, char* argv[]) {
         std::cerr << "Erro ao carregar as matrizes.\n";
         return 1;
     }
+    if (A.colunas != B.linhas) {
+        std::cerr << "Erro: dimensões incompatíveis para multiplicação." << std::endl;
+        return 1;
+    }
 
-    Matriz C = multSequencial(A, B); // Verifica se as dimensões são válidas e multiplica
+    auto tempoInicial = std::chrono::high_resolution_clock::now(); // Salva a hora em que a multiplicação iniciou
+    Matriz C = multSequencial(A, B);
+    auto tempoFinal = std::chrono::high_resolution_clock::now(); // Salva a hora em que a multiplicação terminou
+    auto tempoDeExecucao = std::chrono::duration_cast<std::chrono::milliseconds>(tempoFinal - tempoInicial);
+
+    gerarMatrizSequencial(C, tempoDeExecucao);
 
     return 0;
 }
