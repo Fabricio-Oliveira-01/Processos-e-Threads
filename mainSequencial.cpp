@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
-        std::cout << "Uso: ./nome_do_executável <arquivo1.txt> <arquivo2.txt>" << std::endl;
+        std::cout << "Uso: ./nome_do_executavel <arquivo1.txt> <arquivo2.txt>" << std::endl;
         return 1;
     }
 
@@ -17,11 +17,11 @@ int main(int argc, char* argv[]) {
     Matriz B = lerMatriz(nomeArquivo2);
 
     if (A.linhas == 0 || B.linhas == 0) {
-        std::cerr << "Erro ao carregar as matrizes.\n";
+        std::cerr << "Erro ao carregar as matrizes." << std::endl;
         return 1;
     }
     if (A.colunas != B.linhas) {
-        std::cerr << "Erro: dimensões incompatíveis para multiplicação." << std::endl;
+        std::cerr << "Erro: dimensoes incompativeis para multiplicacao." << std::endl;
         return 1;
     }
 
