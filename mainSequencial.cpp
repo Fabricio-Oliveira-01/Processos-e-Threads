@@ -4,7 +4,7 @@
 
 
 int main(int argc, char* argv[]) {
-    if (argc != 3) {
+    if(argc != 3) {
         std::cout << "Uso: ./nome_do_executavel <arquivo1.txt> <arquivo2.txt>" << std::endl;
         return 1;
     }
