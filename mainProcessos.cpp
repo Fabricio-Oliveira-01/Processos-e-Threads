@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-#include "lerMatriz.h"
+#include "funcsProcessos.h"
+
 
 int main(int argc, char* argv[]) {
     if(argc != 4) {
@@ -10,7 +11,7 @@ int main(int argc, char* argv[]) {
 
     std::string nomeArquivo1 = argv[1];
     std::string nomeArquivo2 = argv[2];
-    std::string P = argv[3];
+    int P = std::stoi(argv[3]);
 
     // Matrizes criadas usando o struct
     Matriz A = lerMatriz(nomeArquivo1);
@@ -25,6 +26,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    multProcessos(A, B, P);
 
     return 0;
 }

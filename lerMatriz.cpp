@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "funcs.h"
+#include "lerMatriz.h"
 
 
 // Struct (declarado no .h) para retornar matriz, linhas e colunas

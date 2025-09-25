@@ -53,7 +53,7 @@ void* rotina_thread(void* args) {
     auto duracao = std::chrono::duration_cast <std::chrono::milliseconds> (fim - inicio);
     long long tempo_ms = duracao.count();
 
-    std::string nomeArquivoResultado = "Threat_" + std::to_string(thread_args->id) + ".txt" ;
+    std::string nomeArquivoResultado = "Thread_" + std::to_string(thread_args->id) + ".txt" ;
     std::ofstream arquivo_saida(nomeArquivoResultado);
 
     for (int index = thread_args->start_index; index < thread_args->end_index; index++){
