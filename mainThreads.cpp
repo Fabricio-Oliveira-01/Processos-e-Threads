@@ -8,9 +8,9 @@
 #include <pthread.h>
 
 //Aviso ao compilador, nao precisando definir novas variaveis dentro da main.
-extern std::vector<std::vector<int>> matriz1;
-extern std::vector<std::vector<int>> matriz2;
-extern std::vector<std::vector<int>> matriz_resultante;
+extern std::vector<std::vector<double>> matriz1;
+extern std::vector<std::vector<double>> matriz2;
+extern std::vector<std::vector<double>> matriz_resultante;
 
 int main(int argc, char* argv[]) {
 
@@ -37,11 +37,11 @@ int main(int argc, char* argv[]) {
     //Pega os tamanhos das matrizes, criando uma vazia para preencher com os threads.
     int n1 = matriz1.size();
     int m2 = matriz2[0].size();
-    matriz_resultante.resize(n1, std::vector<int>(m2));
+    matriz_resultante.resize(n1, std::vector<double>(m2));
 
     //ceil busca o teto do numero. Aqui entra a formula n1*m2/P.
-    int total_elementos = n1 * m2;
-    int num_thread = ceil((double) total_elementos / P);
+    double total_elementos = n1 * m2;
+    int num_thread = ceil(total_elementos / P);
     if(num_thread == 0 && total_elementos > 0) {
         num_thread = 1;
     }

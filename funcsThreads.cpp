@@ -7,11 +7,11 @@
 #include <pthread.h>
 
 //Variaveis globais
-std::vector<std::vector<int>> matriz1;
-std::vector<std::vector<int>> matriz2;
-std::vector<std::vector<int>> matriz_resultante;
+std::vector<std::vector<double>> matriz1;
+std::vector<std::vector<double>> matriz2;
+std::vector<std::vector<double>> matriz_resultante;
 
-bool arquivosDeMatriz(const std::string& nomeArquivo, std::vector<std::vector<int>>& matriz) {
+bool arquivosDeMatriz(const std::string& nomeArquivo, std::vector<std::vector<double>>& matriz) {
     std::ifstream arquivo(nomeArquivo);
     if(!arquivo.is_open()) {
         return false;
@@ -21,7 +21,7 @@ bool arquivosDeMatriz(const std::string& nomeArquivo, std::vector<std::vector<in
     arquivo >> linhas >> colunas;
 
     //Alocacao de tamanho da matriz.
-    matriz.resize(linhas, std::vector<int>(colunas));
+    matriz.resize(linhas, std::vector<double>(colunas));
     for (int i = 0; i < linhas; i++) {
         for (int j = 0; j < colunas; j++) {
             arquivo >> matriz[i][j];
@@ -42,7 +42,7 @@ void* rotina_thread(void* args) {
         int linha = index / thread_args->num_colunas_res;
         int coluna = index % thread_args->num_colunas_res;
 
-        int soma = 0;
+        double soma = 0.0;
         for (size_t k = 0; k < matriz1[0].size(); k++){
             soma += matriz1[linha][k] * matriz2[k][coluna];
         }
@@ -55,6 +55,8 @@ void* rotina_thread(void* args) {
 
     std::string nomeArquivoResultado = "Thread_" + std::to_string(thread_args->id) + ".txt" ;
     std::ofstream arquivo_saida(nomeArquivoResultado);
+
+    arquivo_saida << matriz_resultante.size() << " " << matriz_resultante[0].size() << std::endl;
 
     for (int index = thread_args->start_index; index < thread_args->end_index; index++){
         int linha = index / thread_args->num_colunas_res;

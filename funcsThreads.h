@@ -11,7 +11,7 @@ struct ThreadArgs {
     int num_colunas_res;
 };
 
-bool arquivosDeMatriz(const std::string& nomeArquivo, std::vector<std::vector<int>>& matriz);
+bool arquivosDeMatriz(const std::string& nomeArquivo, std::vector<std::vector<double>>& matriz);
 
 void* rotina_thread(void* args);
 
